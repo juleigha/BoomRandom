@@ -24,13 +24,8 @@ $(document).ready(function() {
 				if(Math.abs(imgs[i].getBoundingClientRect().y) < 3500){
 					imgs[i].dispatchEvent(approaching);
 				}
-				// else{
-				// 	imgs[i].dispatchEvent(receding);
-				// }
 			}
 		}
-
-//		var imgHeight = $("[pan	e-ID=pane1]").height();
 	});
 	$(".chapter-btn").click(function(){
 		if($("#contentsTable").hasClass("Active")){
