@@ -1,3 +1,5 @@
+<!-- Site not redirecting to https; made php changes for owner -->
+
 <?php
 if ( !(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || !$_SERVER['SERVER_PORT'] == 443){
 	header('Location: https://boomrandom.com');
@@ -24,7 +26,7 @@ if ( !(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || !$_SERVER['S
 <link href="favicon_icons/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="favicon_icons/splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 <link href="favicon_icons/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-<!-- Open Graph  -->
+<!-- Graph  -->
 <meta property="og:title" content="Boom Random">
 <meta property="og:description" content="What will Boom do next??">
 <meta property="og:image" content="https://boomrandom.com/favicon_icons/share.png">
@@ -59,10 +61,12 @@ if ( !(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || !$_SERVER['S
 		</button>
 		<div id="contentsTable">
 			<ul>
-			<?php
+		<?php
+			// grab contents file (txt)
 			$chapters = preg_split('/\r\n|\r|\n/', file_get_contents("contents.txt"));
 			$chapter = [];
 			$nav = "";
+				/// build nav
 				$chap=0;
 				while(isset($chapters[$chap]) && $chapters[$chap] !== "") {
 					$chapter["name"] = $chapters[$chap];
@@ -78,27 +82,16 @@ if ( !(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || !$_SERVER['S
 					$chapter["numberOfPages"] = $chapters[$chap];
 					$chap++;
 					$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#{$chapter["folder"]}' data-scroll='{$chapter["folder"]}'>{$chapter["name"]}</a></li>";
-					// $files = scandir("Story/{$chapter["folder"]}");
-					// sort($files);
-					// foreach($files as $file) {
-				}
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
-				$nav.= "<li style='font-family: \"Palooka BB\"'><a href='#x' data-scroll='x'>example</a></li>";
 
+				}
+			// write nav 
 			echo $nav;
 			?>
 			</ul>
 		</div>
 		<div class="overlay"></div>
 		<div class="comic-wrapper">
-			<?php
+	<?php
 			echo $comic;
 			if( $handle = opendir("Story") ) {
 				$paneID=0;
